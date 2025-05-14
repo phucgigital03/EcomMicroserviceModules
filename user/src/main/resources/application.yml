@@ -23,7 +23,7 @@ spring:
 #    database-platform: org.hibernate.dialect.PostgreSQLDialect
   data:
     mongodb:
-      uri: mongodb://localhost:27018/userdb
+      uri: mongodb+srv://phucnguyendigital2003:AO1zAfAkElFBZ3qE@user-data.rim7ork.mongodb.net/?retryWrites=true&w=majority&appName=user-data
       database: userdb
 
 server:

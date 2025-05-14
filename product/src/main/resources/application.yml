@@ -12,9 +12,9 @@ spring:
 #    hibernate:
 #      ddl-auto: create
   datasource:
-    url: jdbc:postgresql://ep-falling-king-a1lx1kfx-pooler.ap-southeast-1.aws.neon.tech/productdb?sslmode=require
-    username: productdb_owner
-    password: npg_qs3Opaoef8ND
+    url: jdbc:postgresql://localhost:5433/productdb
+    username: root
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     database: POSTGRESQL

@@ -2,26 +2,25 @@
 spring:
   application:
     name: user-service
+#  h2:
+#    console:
+#      enabled: true
 #  datasource:
-#    url: jdbc:postgresql://localhost:5432/userdb
-#    username: embarkx
-#    password: embarkx
+#    url: jdbc:h2:mem:test
 #  jpa:
-#    database: POSTGRESQL
 #    show-sql: true
 #    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-  h2:
-    console:
-      enabled: true
+#      ddl-auto: create
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:postgresql://localhost:5433/userdb
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
   jpa:
-    show-sql: true
+    database: POSTGRESQL
     hibernate:
-      ddl-auto: create
-
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8082

@@ -31,13 +31,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Optional<UserResponse> fetchUser(Long id) {
+    public Optional<UserResponse> fetchUser(String id) {
         return userRepository.findById(id).map(user -> {
             return modelMapper.map(user, UserResponse.class);
         });
     }
 
-    public boolean updateUser(Long id, UserRequest userRequest) {
+    public boolean updateUser(String id, UserRequest userRequest) {
         return userRepository.findById(id)
                 .map(existingUser -> {
                     existingUser.setFirstName(userRequest.getFirstName());

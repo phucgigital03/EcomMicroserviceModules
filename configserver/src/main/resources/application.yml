@@ -1,0 +1,15 @@
+
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:/Users/phucnguyen/udemy_Microservice_Embark/practiceCode/Ecom-Microservice-Modules/configserver/src/main/resources/config
+
+server:
+  port: 8888
+

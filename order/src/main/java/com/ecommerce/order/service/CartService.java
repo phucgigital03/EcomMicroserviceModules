@@ -1,8 +1,10 @@
 package com.ecommerce.order.service;
 
 import com.ecommerce.order.clients.ProductServiceClient;
+import com.ecommerce.order.clients.UserServiceClient;
 import com.ecommerce.order.dto.CartItemRequest;
 import com.ecommerce.order.dto.ProductResponse;
+import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.model.CartItem;
 import com.ecommerce.order.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ProductServiceClient productServiceClient;
+    private final UserServiceClient userServiceClient;
 
     public boolean addToCart(String userId, CartItemRequest request) {
 //         Look for product
@@ -34,10 +37,10 @@ public class CartService {
         }
 
         // Look for user
-//        Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
-//        if (userOpt.isEmpty()) {
-//            return false; // User not found
-//        }
+        UserResponse userResponse = userServiceClient.getUserDetails(userId);
+        if (userResponse == null) {
+            return false; // User not found
+        }
 
 //        User user = userOpt.get();
         // Have 2 ways to add product to cart:

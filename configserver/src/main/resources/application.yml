@@ -9,7 +9,17 @@ spring:
       server:
         native:
           search-locations: file:/Users/phucnguyen/udemy_Microservice_Embark/practiceCode/Ecom-Microservice-Modules/configserver/src/main/resources/config
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port: 8888
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

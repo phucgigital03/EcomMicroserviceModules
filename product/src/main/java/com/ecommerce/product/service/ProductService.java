@@ -62,4 +62,9 @@ public class ProductService {
                 .map(product -> modelMapper.map(product, ProductResponse.class))
                 .collect(Collectors.toList());
     }
+
+    public Optional<ProductResponse> getProductById(String id) {
+        return productRepository.findByIdAndActiveTrue(Long.valueOf(id))
+                .map(product -> modelMapper.map(product, ProductResponse.class));
+    }
 }

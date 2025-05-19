@@ -1,6 +1,8 @@
 package com.ecommerce.order.service;
 
+import com.ecommerce.order.clients.ProductServiceClient;
 import com.ecommerce.order.dto.CartItemRequest;
+import com.ecommerce.order.dto.ProductResponse;
 import com.ecommerce.order.model.CartItem;
 import com.ecommerce.order.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,22 +17,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class CartService {
-//    private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
-//    private final UserRepository userRepository;
+    private final ProductServiceClient productServiceClient;
 
     public boolean addToCart(String userId, CartItemRequest request) {
-        // Look for product
-//        Optional<Product> productOpt = productRepository.findById(request.getProductId());
-//        if (productOpt.isEmpty()) {
-//            return false; // Product not found
-//        }
-//        Product product = productOpt.get();
+//         Look for product
+        ProductResponse productResponse = productServiceClient.getProductDetails(request.getProductId());
+//        System.out.println("productResponse = " + productResponse);
+        if (productResponse == null) {
+            return false; // Product not found
+        }
 
         // Check if product is in stock
-//        if (product.getStockQuantity() < request.getQuantity()) {
-//            return false; // Not enough stock
-//        }
+        if (productResponse.getStockQuantity() < request.getQuantity()) {
+            return false; // Not enough stock
+        }
 
         // Look for user
 //        Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));

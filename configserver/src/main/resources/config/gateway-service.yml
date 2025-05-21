@@ -6,7 +6,9 @@
 #        - id: product-service
 #          uri: lb://PRODUCT-SERVICE
 #          predicates:
-#            - Path=/api/products/** # For API Gateway and then route to Product Service
+#            - Path=/api/products/**
+##          filters:
+##            - "RewritePath=/products(?<segment>/?.*),/api/products${segment}"
 #        - id: user-service
 #          uri: lb://USER-SERVICE
 #          predicates:

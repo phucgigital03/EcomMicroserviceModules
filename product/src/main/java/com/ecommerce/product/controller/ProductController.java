@@ -16,6 +16,16 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
+    @GetMapping("/simulate")
+    public ResponseEntity<String> simulateFailure(
+        @RequestParam(defaultValue = "false")  boolean fail
+    ) {
+        if(fail) {
+            throw new RuntimeException("Simulated failure for testing purposes");
+        }
+        return ResponseEntity.ok("Product service is running smoothly");
+    }
+
     @PostMapping()
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
         ProductResponse productResponse = productService.createProduct(productRequest);

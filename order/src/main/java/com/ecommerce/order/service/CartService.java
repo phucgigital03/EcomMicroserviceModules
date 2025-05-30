@@ -24,7 +24,7 @@ public class CartService {
     private final ProductServiceClient productServiceClient;
     private final UserServiceClient userServiceClient;
 
-    @CircuitBreaker(name = "productService")
+    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallBack")
     public boolean addToCart(String userId, CartItemRequest request) {
 //         Look for product
         ProductResponse productResponse = productServiceClient.getProductDetails(request.getProductId());
@@ -65,6 +65,12 @@ public class CartService {
         }
 
         return true;
+    }
+
+    public boolean addToCartFallBack(String userId, CartItemRequest request, Exception exception) {
+        // Fallback method for circuit breaker
+        exception.printStackTrace();
+        return false; // Indicate failure to add to cart
     }
 
     public boolean deleteItemFromCart(String userId, String productId) {

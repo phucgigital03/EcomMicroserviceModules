@@ -17,6 +17,14 @@ spring:
     username: guest
     password: guest
 
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
+
 server:
   port: 8083
 
@@ -76,3 +84,4 @@ resilience4j:
         timeout-duration: 0
         limit-refresh-period: 4s
         limit-for-period: 2
+

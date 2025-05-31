@@ -1,6 +1,8 @@
 package com.ecommerce.notification;
 
 
+import com.ecommerce.notification.payload.OrderConfirmEvent;
+import com.ecommerce.notification.payload.OrderStatus;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +12,12 @@ import java.util.Map;
 public class OrderEventConsumer {
 
     @RabbitListener(queues = "${rabbitmq.queue.name}")
-    public void handleOrderEvent(Map<String, Object> orderEvent) {
-        System.out.println("Received order event: " + orderEvent);
+    public void handleOrderEvent(OrderConfirmEvent orderConfirmEvent) {
+        System.out.println("Received order event: " + orderConfirmEvent);
 
         // Process the order event
-        long orderId = Long.parseLong(orderEvent.get("orderId").toString());
-        String status = orderEvent.get("status").toString();
+        long orderId = orderConfirmEvent.getOrderId();
+        OrderStatus status = orderConfirmEvent.getStatus();
 
         System.out.println("Received order event: Order ID: " + orderId + ", Status: " + status);
 

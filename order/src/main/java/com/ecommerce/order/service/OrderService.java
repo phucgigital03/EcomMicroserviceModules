@@ -1,5 +1,6 @@
 package com.ecommerce.order.service;
 
+import com.ecommerce.order.dto.OrderConfirmEvent;
 import com.ecommerce.order.dto.OrderResponse;
 import com.ecommerce.order.model.CartItem;
 import com.ecommerce.order.model.Order;
@@ -83,8 +84,16 @@ public class OrderService {
             item.setSubTotal(item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
         });
 
+        OrderConfirmEvent event = new OrderConfirmEvent(
+                orderResponse.getId(),
+                savedOrder.getUserId(),
+                orderResponse.getStatus(),
+                orderResponse.getItems(),
+                orderResponse.getTotalAmount(),
+                orderResponse.getCreatedAt()
+        );
         rabbitTemplate.convertAndSend(exchangeName, routingKey,
-                Map.of("orderId", orderResponse.getId(),"status", "CONFIRMED")
+               event
         );
 
         return Optional.of(orderResponse);

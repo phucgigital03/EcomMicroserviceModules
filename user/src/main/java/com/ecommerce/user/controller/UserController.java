@@ -36,7 +36,7 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping()
+    @PostMapping("/auth")
     public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest){
         userService.addUser(userRequest);
         return ResponseEntity.ok("User added successfully");

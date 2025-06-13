@@ -27,10 +27,11 @@ public class SecurityConfig {
         http
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange(authorize -> authorize
+                    .pathMatchers("/api/users/auth").permitAll()
                     .pathMatchers("/api/products/**").hasRole("PRODUCT")
                     .pathMatchers("/api/orders/**").hasRole("ORDER")
                     .pathMatchers("/api/users/**").hasRole("USER")
-                    .anyExchange().authenticated()
+                    .anyExchange().permitAll()
             )
             .oauth2ResourceServer(oauth2 -> oauth2
                     .jwt(jwt -> jwt

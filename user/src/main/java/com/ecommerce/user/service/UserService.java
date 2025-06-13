@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final KeycloakAdminService keycloakAdminService;
 
     public List<UserResponse> fetchAllUsers() {
         return userRepository.findAll().stream().map(user -> {
@@ -27,7 +28,12 @@ public class UserService {
     }
 
     public void addUser(UserRequest userRequest) {
+        String token = keycloakAdminService.getKeycloakAdminToken();
+        String keycloakId = keycloakAdminService.createUser(token, userRequest);
+
         User user = modelMapper.map(userRequest, User.class);
+
+        user.setKeycloakId(keycloakId);
         userRepository.save(user);
     }
 

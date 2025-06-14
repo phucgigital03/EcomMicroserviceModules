@@ -43,6 +43,7 @@ keycloak:
   admin:
     realm: ${KEYCLOAK_ADMIN_REALM:ecom-app}
     client-id: ${KEYCLOAK_ADMIN_CLIENT_ID:admin-cli}
+    client-uid: ${KEYCLOAK_ADMIN_CLIENT_UID:0066e967-1ba4-4829-920f-980f054e9a60}
     username: ${KEYCLOAK_ADMIN_USERNAME:user}
     password: ${KEYCLOAK_ADMIN_PASSWORD:1234}
     server-url: ${KEYCLOAK_ADMIN_SERVER_URL:http://localhost:8443}

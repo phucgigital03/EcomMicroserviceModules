@@ -34,6 +34,21 @@ public class UserService {
         User user = modelMapper.map(userRequest, User.class);
 
         user.setKeycloakId(keycloakId);
+        // Assign multiple client roles
+//        List<String> rolesToAssign = List.of("USER", "PRODUCT");
+//        for (String role : rolesToAssign) {
+//            keycloakAdminService.assignClientRoleToUser(
+//                    userRequest.getUsername(),
+//                    role,
+//                    keycloakId
+//            );
+//        }
+        // Assign one client role
+        keycloakAdminService.assignClientRoleToUser(
+                userRequest.getUsername(),
+                "USER",
+                keycloakId
+        );
         userRepository.save(user);
     }
 
